@@ -17,7 +17,7 @@ library(reshape)
 breweries <- read_csv("breweries.csv")
 beers <- read_csv("beers.csv")
 
-beers[is.na(beers)] <- 0
+beers[is.na(beers)] = 0
 
 clean_breweries = breweries %>%
   rename(brewery = name) %>%

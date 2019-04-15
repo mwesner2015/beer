@@ -13,12 +13,9 @@ library(shiny)
 library(readr)
 library(reshape)
 
-breweries <- read_csv("data/breweries.csv")
-beers <- read_csv("data/beers.csv")
 
-beers = select(beers,-X1)
-beers[is.na(beers)] <- 0
-
+breweries <- read_csv("breweries.csv")
+beers <- read_csv("beers.csv")
 
 beers[is.na(beers)] <- 0
 
@@ -31,6 +28,7 @@ clean_beer = beers %>%
   rename(beer = name)
 
 beer = full_join(clean_breweries, clean_beer, by = 'brewery_id')
+beer[[5]] = NULL
 
 ui = fluidPage(
   navbarPage("Craft Beers", 
@@ -74,7 +72,7 @@ server = function(input, output){
   
   output$plot = renderPlot(
     plot(abv ~ ibu, 
-         xlab = "abv", ylab="ibu", 
+         xlab = "ibu", ylab="abv", 
          data = beer)+
       abline(lm(abv~ ibu, data=beer))
   )

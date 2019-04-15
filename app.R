@@ -33,31 +33,54 @@ clean_beer = beers %>%
 beer = full_join(clean_breweries, clean_beer, by = 'brewery_id')
 
 ui = fluidPage(
-  titlePanel("Craft Beer in the US"),
-  
-  # Create a new Row in the UI for selectInputs
-  fluidRow(
-    column(4,
-           selectInput("brewery",
-                       "Choose a Brewery:",
-                       c("All",
-                         unique(as.character(beer$brewery))))
+  navbarPage("Craft Beers", 
+      tabPanel("Brewery finder",
+          titlePanel("Craft Beer in the US"),
+          
+          # Create a new Row in the UI for selectInputs
+          fluidRow(
+            column(4,
+                   selectInput("brewery",
+                               "Choose a Brewery:",
+                               c("All",
+                                 unique(as.character(beer$brewery))))
+            )
+          ),
+          # Create a new row for the table.
+          DT::dataTableOutput("table")
+                  ),
+      
+      tabPanel("Regression",
+        titlePanel("Linear Regression of abv and ibu"),
+        
+        mainPanel(
+            plotOutput("plot"),
+            verbatimTextOutput("analysis")
+        )
+                              
+                           
+      )     
     )
-  ),
-  # Create a new row for the table.
-  DT::dataTableOutput("table")
 )
-
-server = function(input, output) {
-  
+server = function(input, output){
   # Filter data based on selections
-  output$table <- DT::renderDataTable(DT::datatable({
+  output$table = DT::renderDataTable(DT::datatable({
     data = beer
     if (input$brewery != "All") {
       data <- data[data$brewery == input$brewery,]
     }
     data
   }))
+  
+  output$plot = renderPlot(
+    plot(abv ~ ibu, 
+         xlab = "abv", ylab="ibu", 
+         data = beer)+
+      abline(lm(abv~ ibu, data=beer))
+  )
+  output$analysis = renderPrint(
+    summary(aov(abv ~ ibu, data=beer))
+  )
   
 }
 shinyApp(ui = ui, server = server)

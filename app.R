@@ -14,8 +14,8 @@ library(readr)
 library(reshape)
 
 
-breweries <- read_csv("/data/breweries.csv")
-beers <- read_csv("/data/beers.csv")
+breweries <- read_csv("data/breweries.csv")
+beers <- read_csv("data/beers.csv")
 
 beers[is.na(beers)] = 0
 

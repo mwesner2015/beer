@@ -14,7 +14,9 @@ runGitHub( "beer", "mwesner2015")
 ```
 The first tab that opens is an easy way to find canned craft beers from over 500 craft brewers. Simply click on the 
 "choose a brewery" and scroll through to find which beers are brewed by individual brewers. 
-The columns of the data stand for 
+The columns of the data stand for brewery_id is an index for brewery, brewery is brewery name, city and state for where
+the brewery is located, abv is alcohol content by volume, ibu is international bittering units, name is the name of the beer, 
+and style is the style of the beer.
 
-The next tab labelled "regression" is an investigation into whether there is a relationship between the alcohol content of a beer 
-and the ibu's of a beer. 
+The next tab labelled "regression" is a preliminary investigation into whether there is a relationship between the alcohol content
+of a beer and the ibu's of a beer. 

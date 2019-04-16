@@ -29,6 +29,7 @@ clean_beer = beers %>%
 
 beer = full_join(clean_breweries, clean_beer, by = 'brewery_id')
 beer[[5]] = NULL
+beer[[1]] = NULL
 beer = beer[!is.na(beer$brewery), ]
 
 ui = fluidPage(

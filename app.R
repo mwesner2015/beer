@@ -62,15 +62,15 @@ ui = fluidPage(
              
              tabPanel("Regression",
                       titlePanel("Linear Regression of abv and ibu"),
-                      fluidRow(
-                        column(7,
+                      fluidPage(
+                      
                           sidebarLayout(
                             sidebarPanel(
                               selectInput(inputId = "response", 
                                       label = "Choose a category", 
                                       choices = c("ibu", "ounces"))
                                     ),
-                      mainPanel(
+                      mainPanel(width = 10,
                         plotOutput("plot"),
                         verbatimTextOutput("analysis")
                       )
@@ -78,7 +78,7 @@ ui = fluidPage(
                   )   
              )     
              )
-             )
+             
 )
 server = function(input, output){
   # Filter data based on selections

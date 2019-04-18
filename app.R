@@ -1,11 +1,11 @@
 if("DT" %in% rownames(installed.packages()) == FALSE) {install.packages("DT")}
 if("tidyr" %in% rownames(installed.packages()) == FALSE) {install.packages("tidyr")}
 if("ggplot2" %in% rownames(installed.packages()) == FALSE) {install.packages("ggplot2")}
-if("plyr" %in% rownames(installed.packages()) == FALSE) {install.packages("plyr")}
+if("dplyr" %in% rownames(installed.packages()) == FALSE) {install.packages("dplyr")}
 if("shiny" %in% rownames(installed.packages()) == FALSE) {install.packages("shiny")}
 if("readr" %in% rownames(installed.packages()) == FALSE) {install.packages("readr")}
 if("reshape" %in% rownames(installed.packages()) == FALSE) {install.packages("reshape")}
-library(plyr)
+library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(DT)

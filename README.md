@@ -14,12 +14,14 @@ library(shiny)
 runGitHub( "beer", "mwesner2015") 
 ```
 The first tab that opens is an easy way to find canned craft beers from over 500 craft brewers. Simply click on the 
-"choose a brewery" and scroll through to find which beers are brewed by individual brewers. 
-The columns of the data stand for brewery is brewery name, city and state for wherethe brewery is located, abv is alcohol content 
-by volume, ibu is international bittering units, name is the name of the beer, and style is the style of the beer.
+"choose a brewery" and scroll through to find which beers are brewed by individual brewers, "choose a state" will give the state 
+the brewery is located in, and "choose a style" to sort the data by the style of the beer. The columns of the data stand for 
+brewery is brewery name, city and state for wherethe brewery is located, abv is alcohol content by volume, ibu is international 
+bittering units, name is the name of the beer, and style is the style of the beer.
 
 The next tab labelled "regression" is a preliminary investigation into whether there is a relationship between the alcohol content
-of a beer and the ibu's of a beer. 
+of a beer and the ibu's of a beer or ounces of the can. Switching between ounces and ibu gives the scatterplot along with the 
+linear model line and analysis of variance for whichever variable is chosen.
 
 
 Data comes from www.kaggle.com/nickhould/craft-cans/version/1.

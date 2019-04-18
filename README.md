@@ -19,3 +19,6 @@ by volume, ibu is international bittering units, name is the name of the beer, a
 
 The next tab labelled "regression" is a preliminary investigation into whether there is a relationship between the alcohol content
 of a beer and the ibu's of a beer. 
+
+
+Data comes from www.kaggle.com/nickhould/craft-cans/version/1.

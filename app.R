@@ -4,14 +4,14 @@ if("ggplot2" %in% rownames(installed.packages()) == FALSE) {install.packages("gg
 if("dplyr" %in% rownames(installed.packages()) == FALSE) {install.packages("dplyr")}
 if("shiny" %in% rownames(installed.packages()) == FALSE) {install.packages("shiny")}
 if("readr" %in% rownames(installed.packages()) == FALSE) {install.packages("readr")}
-if("reshape" %in% rownames(installed.packages()) == FALSE) {install.packages("reshape")}
+
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(DT)
 library(shiny)
 library(readr)
-library(reshape)
+
 
 
 breweries <- read_csv("data/breweries.csv")

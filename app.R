@@ -35,52 +35,72 @@ beer = beer[!is.na(beer$brewery), ]
 
 ui = fluidPage(
   navbarPage("Craft Beers", 
-      tabPanel("Brewery finder",
-          titlePanel("Craft Beer in the US"),
-          
-          # Create a new Row in the UI for selectInputs
-          fluidRow(
-            column(4,
-                   selectInput("brewery",
-                               "Choose a Brewery:",
-                               c("All",
-                                 unique(as.character(beer$brewery))))
-            )
-          ),
-          # Create a new row for the table.
-          DT::dataTableOutput("table")
-                  ),
-      
-      tabPanel("Regression",
-        titlePanel("Linear Regression of abv and ibu"),
-        
-        mainPanel(
-            plotOutput("plot"),
-            verbatimTextOutput("analysis")
-        )
-                              
-                           
-      )     
-    )
+             tabPanel("Brewery finder",
+                      titlePanel("Craft Beer in the US"),
+                      
+                      # Create a new Row in the UI for selectInputs
+                      fluidRow(
+                        column(4,
+                               selectInput("brewery",
+                                           "Choose a Brewery:",
+                                           c("All",
+                                             unique(as.character(beer$brewery)))),
+                               selectInput("state",
+                                           "Choose a State:",
+                                           c("All",
+                                             unique(as.character(beer$state)))),
+                               selectInput("style",
+                                           "Choose a Style:",
+                                           c("All",
+                                             unique(as.character(beer$style))))
+                        
+                               )
+                      ),
+                      # Create a new row for the table.
+                      DT::dataTableOutput("table")
+             ),
+             
+             tabPanel("Regression",
+                      titlePanel("Linear Regression of abv and ibu"),
+                      fluidRow(
+                        column(7,
+                          sidebarLayout(
+                            sidebarPanel(
+                              selectInput(inputId = "response", 
+                                      label = "Choose a category", 
+                                      choices = c("ibu", "ounces"))
+                                    ),
+                      mainPanel(
+                        plotOutput("plot"),
+                        verbatimTextOutput("analysis")
+                      )
+                    ) 
+                  )   
+             )     
+             )
+             )
 )
 server = function(input, output){
   # Filter data based on selections
   output$table = DT::renderDataTable(DT::datatable({
     data = beer
     if (input$brewery != "All") {
-      data <- data[data$brewery == input$brewery,]
-    }
+      data <- data[data$brewery == input$brewery,]}
+    if (input$state != "All") {
+      data <- data[data$state == input$state,]}
+    if (input$style != "All") {
+      data <- data[data$style == input$style,]}
     data
   }))
   
   output$plot = renderPlot(
-    plot(abv ~ ibu, 
-         xlab = "ibu", ylab="abv", 
+    plot(abv ~ get(input$response), 
+         xlab = input$response, ylab="abv", 
          data = beer)+
-      abline(lm(abv~ ibu, data=beer))
+      abline(lm(abv~ get(input$response), data=beer))
   )
   output$analysis = renderPrint(
-    summary(aov(abv ~ ibu, data=beer))
+    summary(aov(abv ~ get(input$response) , data=beer))
   )
   
 }

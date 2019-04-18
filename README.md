@@ -9,6 +9,7 @@ twists.
 ### HOW TO USE
 In order to use this app, go to R and run this code:
 ```
+if("shiny" %in% rownames(installed.packages()) == FALSE) {install.packages("shiny")}
 library(shiny)
 runGitHub( "beer", "mwesner2015") 
 ```
